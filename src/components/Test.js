@@ -6,20 +6,41 @@ export default class Test extends Component {
         super(props);
         this.state = {
             people: [
-                { name: "Mark", age: 10 },
-                { name: "Rob", age: 20 }
-            ]
+                { id: 1, name: "Mark", age: 10 },
+                { id: 2, name: "Rob", age: 20 }
+            ],
+            current: [1,2]
         }
     }
+
+    // increaseAge = () => {
+    //     const ar = [];
+    //     this.state.people.map(p => {
+    //         let r = {};
+    //         r.name = p.name;
+    //         r.age = p.age + 1;
+    //         ar.push(r);
+    //     });
+    //     this.setState({
+    //         people: ar
+    //     })
+    // }
 
     increaseAge = () => {
         const ar = [];
         this.state.people.map(p => {
             let r = {};
             r.name = p.name;
-            r.age = p.age + 1;
+            console.log(p.id)
+            if (p.id === this.state.current[0]) {
+                r.age = p.age + 1;
+            } else {
+                r.age = p.age;
+            }
+            
             ar.push(r);
         });
+        
         this.setState({
             people: ar
         })
@@ -44,11 +65,17 @@ export default class Test extends Component {
                 <hr />
                 <div>
                     {this.state.people.map((p, index) => (
-                        <h1 key={index}>{p.name} / {p.age}</h1>
+                        <div key={index}>
+                            
+                                <p>{p.name} / {p.age}
+                                    <button onClick={this.increaseAge}>increase age</button>
+                                    <button onClick={this.decreaseAge}>decrease age</button>
+                                </p>
+                           
+                        </div>
                     )
                     )}
-                    <button onClick={this.increaseAge}>increase age</button>
-                    <button onClick={this.decreaseAge}>decrease age</button>
+
                 </div>
             </>
         )

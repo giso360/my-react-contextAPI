@@ -5,23 +5,26 @@ function Child() {
 
     return (
         <Consumer>
+            
             {context => (
                 <div>
                     <h1>Child Component</h1>
                     {context.people.map(person => {
+                       
                         return (
-                            <div>
-                                <p key={person.id}>
+                            <div key={person.id}>
+                                <p>
                                     Hi, I am {person.name} and I am {person.age} years old.
                                     <button onClick={context.inc} style={{marginLeft: 2}}>+</button>
                                     <button onClick={context.dec} style={{marginLeft: 2}}>-</button>
-                                </p>                                    
+                                </p>                                     
                             </div>
                         )
                     })}
 
                 </div>
             )}
+
         </Consumer>
     )
 }
